@@ -100,11 +100,8 @@
 ## Some notes related to task - 
 
 - In mongoDB, the indexes are already present. MongoDB makes use of _id field to perform indexing in the database. However, I have also indexed the database using videoId identifier in the ascending order. 
-- This application fetches the data from the YouTube API every 10 second. 
-- With each request that is made to the YouTube API, only 5 videos are recieved. This number can be changed as per the requirements. 
+- This application fetches the data from the YouTube API every 10 second. With each request that is made to the YouTube API, only 5 videos are recieved. This number can be changed as per the requirements. 
 - The video is added to the database only if it is a unique video - this prevents duplicate entries from creeping in the database. 
 - I have tried to handle the errors in the best way possible so that it prevents the application from breaking at any given point of time.  
 - Youtube API may stop working and give 403 forbidden error if the number of requests exceed the free tier request limit.  
-
-## Note
-- I do know that I should have added .env file in my .gitignore file but I have explicitly decided to commit this file along with all the other files. This is to make testing easier whithout getting into the specifics of generating Youtube API keys or mongoDB keys.  
+- I know that I should have added .env file in my .gitignore file but I have explicitly decided to commit this file along with all the other files. This is to make testing easier whithout getting into the specifics of generating Youtube API keys or mongoDB keys.  
