@@ -8,6 +8,7 @@ const config = require('./config/config')
 const express = require('express')
 const { default: axios } = require('axios')
 const app = express()
+app.use(express.json())
 
 const connectDB = require('./controllers/connection')   //an asynchronos function to establish a connection with the database
 connectDB().then(async () => {
@@ -24,17 +25,17 @@ connectDB().then(async () => {
         const data = response.data.items
         
         //saving each video one-by-one in the database
-        data.forEach(async (video) => {
-            if(!(await findVideoById(video.id.videoId))){    //don't add the video in database if the video with the same id is already present
-                addToDatabase({
-                    title: video.snippet.title,
-                    videoId: video.id.videoId,
-                    description: video.snippet.description,
-                    thumbnails: video.snippet.thumbnails,
-                    publishedOn: video.snippet.publishTime
-                })
-            } 
-        });
+        // data.forEach(async (video) => {
+        //     if((await findVideoById(video.id.videoId)) === null){    //don't add the video in database if the video with the same id is already present
+        //         addToDatabase({
+        //             title: video.snippet.title,
+        //             videoId: video.id.videoId,
+        //             description: video.snippet.description,
+        //             thumbnails: video.snippet.thumbnails,
+        //             publishedOn: video.snippet.publishTime
+        //         })
+        //     } 
+        // });
 
     } catch (error) {
         console.log('Error occured while adding to the database') //sending back the error to express server to be sent as a response
@@ -44,13 +45,13 @@ connectDB().then(async () => {
     console.log('An error occured while connecting to the DB')
 })
 
-app.get('/search', async (req, res, next) => {
+//an API route to respond with the paginated results 
+const getVideos = require('./routes/getVideos')
+app.use('/getvideos', getVideos)
 
-
-
-})
-
-
+//an API route to search videos using their title and description
+const searchVideos = require('./routes/searchVideo')
+app.use('/search', searchVideos)
 
 app.listen(PORT, () => {
     console.log(`Listening on the port ${PORT}`);

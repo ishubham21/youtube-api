@@ -27,4 +27,7 @@ const videoSchema = new mongoose.Schema({
     }
 })
 
+//though in mongoDB, indexing is already done based on the _id field, but I'm still adding an index here
+//indexing the database based on videoId in the ascending order
+videoSchema.index({ videoId: 1 })
 module.exports = mongoose.model('Video', videoSchema)

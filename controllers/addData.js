@@ -1,4 +1,4 @@
-const Video = require('./../models/youtube')
+const Video = require('../models/video')
 
 module.exports = async ({ title, description, videoId, thumbnails, publishedOn }) => {
     const video = new Video({

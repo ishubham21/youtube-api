@@ -1,6 +1,5 @@
 //config file to separate and export all the config 
 
-
 //since we are using configurations from the .env file
 const dotenv = require('dotenv')
 dotenv.config()
