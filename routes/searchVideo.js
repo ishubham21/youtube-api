@@ -4,8 +4,7 @@ const router = require('express').Router()
 router.post('/', async (req, res) => {
 
     const { title, description } = req.body
-    console.log(req.body)
-
+    
     //return an error if no video title is found
     if (!title) {
         return res.status(400).json({
@@ -24,8 +23,6 @@ router.post('/', async (req, res) => {
         })
     }
 
-    //sending the video data as a response
-    res.send(videoData)
 })
 
 module.exports = router
