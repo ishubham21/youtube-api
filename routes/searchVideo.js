@@ -1,17 +1,31 @@
 const Video = require('./../models/video')
 const router = require('express').Router()
-const findVideoById = require('./../controllers/findVideo')
 
-router.get('/', (req, res) => {
+router.post('/', async (req, res) => {
 
-    const videoId = req.query.id
-    if(!videoId){
+    const { title, description } = req.body
+    console.log(req.body)
+
+    //return an error if no video title is found
+    if (!title) {
         return res.status(400).json({
-            error: 'Please pass a valid video identifier, use format http://localhost:8080/search?id=<your_video_id>'
+            error: 'No titile found for the request body'
         })
     }
-    const videoData = findVideoById(videoId)
-    res.status(200).send(videoData)
+
+    try {
+        //our query that would be passed to the database
+        const videoData = await Video.findOne({ title: title })
+        res.status(200).send(videoData)
+    } catch (error) {   //responding with 500 in case of any error
+        return res.status(500).json({
+            error: "It's an error from our side",
+            data: error
+        })
+    }
+
+    //sending the video data as a response
+    res.send(videoData)
 })
 
 module.exports = router

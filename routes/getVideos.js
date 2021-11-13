@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
     }
 
     try{
+        
         const skip = (page - 1) * limit     //calculating the number of responses to be skipped 
         const videos = await Videos.find({})    //querying the database to paginate the API
                                    .sort({publishedOn: -1})
@@ -21,10 +22,13 @@ router.get('/', async (req, res) => {
                                    .skip(skip)
                                    .exec()
         return res.status(200).send(videos)
+
     }catch(error){
+        
         return res.status(500).json({
             error: 'Something broke at our end.'
         })
+    
     }
 
 })

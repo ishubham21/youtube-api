@@ -12,7 +12,7 @@ const apiKey = process.env.API_KEY  //we have saved our API key in the .env that
 const urlParams = {
     type: 'video',
     part: 'snippet',
-    maxResults: 50, //setting the number of results we want in a single API call
+    maxResults: 5, //setting the number of results we want in a single API call
     publishedAfter: '2010-01-01T00:00:00Z', //to get videos after 01 Jan, 2010 - using this date format since Youtube API supports request in RFC 3339 format
     order: 'date',  //to fetch videos in the reverse chronological order
     q: 'football'   //pre-defined query string i.e. football

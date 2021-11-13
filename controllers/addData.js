@@ -12,7 +12,7 @@ module.exports = async ({ title, description, videoId, thumbnails, publishedOn }
     //trying to save the video in the database and return an error if found
     try {
         const savedVideo = await video.save()
-        console.log(savedVideo)
+        console.log(savedVideo.videoId)
     } catch (error) {
         console.error('An error occurred while adding to the database')
     }
